@@ -56,6 +56,20 @@ out.rosette.data = ...
 out.rosette.desc = 'Orange-to-red-to-blue-to-green. For use in +rose package (Rosette class). Only 32 values.';
 % % % END: 'rosette' % % %
 
+% % % BEGIN: 'state' % % %
+out.state.data = [ ...
+    1       10      20      % Rich Black FOGRA 29
+    148     35      69      % Big Dip Oruby
+    107     79      115     % English Violet
+    66      122     161     % Steel Blue
+    127     140     152     % Light Slate Gray
+    75      138     210     % Tufts Blue
+    103     148     54      % Maximum Green
+    165     190     0       % Acid Green
+    212     235     65];    % Maximum Green Yellow
+out.state.desc = 'Black-red-blue-green-yellow progression. For center-out task state color maps.';
+% % % END: 'state' % % %
+
 % % % BEGIN: 'bluered' % % %
 out.bluered.data = ...
     [     0     0   131
