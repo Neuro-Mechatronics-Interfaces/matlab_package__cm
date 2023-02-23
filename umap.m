@@ -25,8 +25,8 @@ cfixed = double(validatecolor(color)) .* 255.0;
 
 cmapdata = nan(256, 3);
 for ii = 1:3
-    cmapdata(1:200,   ii) = interp1([1,   200], [0,   cfixed(ii)],   1:200, "linear");
-    cmapdata(201:256, ii) = interp1([201, 256], [cfixed(ii), 255], 201:256, "linear");
+    cmapdata(1:32,   ii) = interp1([1,   32], [0,   cfixed(ii)],   1:32, "linear");
+    cmapdata(33:256, ii) = interp1([33, 256], [cfixed(ii), 255], 33:256, "linear");
 end
 cmapdata = uint8(round(cmapdata));
 
