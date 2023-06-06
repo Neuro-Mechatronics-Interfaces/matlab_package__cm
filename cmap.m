@@ -2,11 +2,11 @@ classdef cmap < handle
     %CMAP  Handle class for RBG color map interpolation
     
     properties (Access=protected)
-        CLim = [-1 1]  % Color map data limits. Set this to whatever axes colormap limits are. 
         cmapdata       % Color map rgb array. This determines actual RGB colors that are interpolated between.
     end
     
     properties (GetAccess=public, SetAccess=protected)
+        CLim = [-1 1]  % Color map data limits. Set this to whatever axes colormap limits are. 
         red
         green
         blue
