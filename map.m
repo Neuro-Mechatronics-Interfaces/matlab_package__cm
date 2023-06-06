@@ -14,8 +14,8 @@ function cmapdata = map(name)
 %
 % See also: Contents
 
-if nargin < 1
-    name = 'greenred';
+arguments
+    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
 end
 
 out = struct;
