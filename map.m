@@ -15,10 +15,62 @@ function cmapdata = map(name)
 % See also: Contents
 
 arguments
-    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
+    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["z", "rosette", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
 end
 
 out = struct;
+% % % BEGIN: 'z' % % %
+out.z.data = ...
+    [    22     1    76
+    29     6   115
+    27    13   130
+    10    10   143
+     8    25   153
+    11    42   163
+    14    62   173
+    14    81   181
+    13   101   189
+    10   119   196
+     8   137   201
+     8   157   207
+     6   181   212
+    13   204   217
+    18   218   222
+    67   230   220
+   108   240   223
+   146   246   213
+   168   250   215
+   195   250   221
+   211   250   226
+   227   252   236
+   233   252   239
+   255   255   248
+   252   252   231
+   253   248   205
+   253   246   182
+   252   244   164
+   250   234   130
+   247   223   104
+   242   210    82
+   237   198    71
+   232   183    60
+   227   168    50
+   224   158    43
+   222   140    40
+   217   121    37
+   212   105    34
+   207    88    29
+   201    68    24
+   189    47    19
+   176    32    16
+   158    16    11
+   140     7    18
+   120     4    23
+   102     1    26
+    48     0    18];
+out.z.desc = 'Blue-to-white-to-red. 47 values.';
+% % % END: 'rosette' % % %
+
 % % % BEGIN: 'rosette' % % %
 out.rosette.data = ...
     [255,195,165;
