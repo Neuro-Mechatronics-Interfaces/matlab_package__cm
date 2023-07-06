@@ -42,8 +42,8 @@ ifixed = round(alpha * n);
 
 cmapdata = nan(n, 3);
 for ii = 1:3
-    cmapdata(1:32,   ii) = interp1([1,   ifixed], [0,   cfixed(ii)],   1:ifixed, "linear");
-    cmapdata(33:256, ii) = interp1([ifixed+1, n], [cfixed(ii), 255], (ifixed+1):n, "linear");
+    cmapdata(1:ifixed,   ii) = interp1([1,   ifixed], [0,   cfixed(ii)],   1:ifixed, "linear");
+    cmapdata((ifixed+1):n, ii) = interp1([ifixed+1, n], [cfixed(ii), 255], (ifixed+1):n, "linear");
 end
 cmapdata = uint8(round(cmapdata));
 
