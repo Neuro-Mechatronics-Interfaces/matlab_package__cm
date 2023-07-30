@@ -15,10 +15,25 @@ function cmapdata = map(name)
 % See also: Contents
 
 arguments
-    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
+    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
 end
 
 out = struct;
+% % % BEGIN: 'tartan' % % %
+out.tartan.data = ...
+    [196, 18, 48;      % Carnegie Red
+       0,  0,  0;      % Black
+     109,110,113;      % Iron Grey
+     224,224,224;      % Steel Gray
+     239, 58, 71;      % Scots Red
+     253,181, 21;      % Gold Thread
+       0,150, 71;      % Green Thread
+       0,143,145;      % Teal Thread
+       4, 54,115;      % Blue Thread
+       0,123,192   ... % Highlands Sky Blue
+     ];
+out.tartan.desc = 'Carnegie Mellon University primary pallette is first-four rows ({Carnegie Red, Black, Iron Grey, Steel Gray}). Secondary pallette is last-6 rows ({Scots Rose, Gold Thread, Green Thread, Teal Thread, Blue Thread, Highlands Sky Blue}).';
+% % % END: 'tartan' % % %
 % % % BEGIN: 'rosette' % % %
 out.rosette.data = ...
     [255,195,165;
