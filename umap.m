@@ -38,7 +38,7 @@ arguments
 end
 
 cfixed = double(validatecolor(color)) .* 255.0;
-ifixed = round(alpha * n);
+ifixed = max(round(alpha * n),2);
 
 cmapdata = nan(n, 3);
 for ii = 1:3
