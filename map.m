@@ -1,9 +1,10 @@
-function cmapdata = map(name)
+function cmapdata = map(name, options)
 %MAP Return custom colormap data.
 %
 % Syntax:
 %   cmapdata = cm.map();
 %   cmapdata = cm.map('mapname');
+%   cmapdata = cm.map('mapname', 'Name', value, ...);
 %   cm.map('help'); % Returns valid values for 'mapname' and descriptions.
 %
 % Inputs:
@@ -12,15 +13,20 @@ function cmapdata = map(name)
 % Output:
 %   cmapdata - [256 x 3] colormap
 %
+% Example:
+%
 % See also: Contents
 
 arguments
     name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
+    options.DataType (1,1) string {mustBeTextScalar, mustBeMember(options.DataType, ["uint8", "double", "single"])} = "uint8";
+    options.N (1,1) = nan; % If non-NaN, must be positive-integer; will specify the number of elements in returned colormap in that case. Otherwise, returns the colormap as-is.
 end
 
 out = struct;
 % % % BEGIN: 'tartan' % % %
 out.tartan.data = ...
+    uint8(...
     [196, 18, 48;      % Carnegie Red
        0,  0,  0;      % Black
      109,110,113;      % Iron Grey
@@ -31,11 +37,12 @@ out.tartan.data = ...
        0,143,145;      % Teal Thread
        4, 54,115;      % Blue Thread
        0,123,192   ... % Highlands Sky Blue
-     ];
+     ]);
 out.tartan.desc = 'Carnegie Mellon University primary pallette is first-four rows ({Carnegie Red, Black, Iron Grey, Steel Gray}). Secondary pallette is last-6 rows ({Scots Rose, Gold Thread, Green Thread, Teal Thread, Blue Thread, Highlands Sky Blue}).';
 % % % END: 'tartan' % % %
 % % % BEGIN: 'rosette' % % %
 out.rosette.data = ...
+        uint8(...
     [255,195,165;
     247,179,162;
     238,163,160;
@@ -67,27 +74,32 @@ out.rosette.data = ...
     40,142,61;
     48,155,47;
     57,169,34;
-    65,182,21];
+    65,182,21]);
 out.rosette.desc = 'Orange-to-red-to-blue-to-green. For use in +rose package (Rosette class). Only 32 values.';
 % % % END: 'rosette' % % %
 
 % % % BEGIN: 'state' % % %
-out.state.data = [ ...
-    1       10      20      % Rich Black FOGRA 29
-    148     35      69      % Big Dip Oruby
-    107     79      115     % English Violet
-    66      122     161     % Steel Blue
-    127     140     152     % Light Slate Gray
-    75      138     210     % Tufts Blue
-    103     148     54      % Maximum Green
-    165     190     0       % Acid Green
-    212     235     65];    % Maximum Green Yellow
+out.state.data =  uint8(...
+     [ ...
+        1       10      20      % Rich Black FOGRA 29
+        148     35      69      % Big Dip Oruby
+        107     79      115     % English Violet
+        66      122     161     % Steel Blue
+        127     140     152     % Light Slate Gray
+        75      138     210     % Tufts Blue
+        103     148     54      % Maximum Green
+        165     190     0       % Acid Green
+        212     235     65 ...  % Maximum Green Yellow
+      ] ...
+);   
 out.state.desc = 'Black-red-blue-green-yellow progression. For center-out task state color maps.';
 % % % END: 'state' % % %
 
 % % % BEGIN: 'bluered' % % %
 out.bluered.data = ...
-    [     0     0   131
+        uint8(...
+    [...
+    0     0   131
     0     1   133
     1     2   135
     1     3   137
@@ -342,12 +354,13 @@ out.bluered.data = ...
     139     0     0
     135     0     0
     131     0     0
-    128     0     0];
+    128     0     0]);
 out.bluered.desc = 'Blue to red map for stimulating patch, with greyish values in middle range.';
 % % % END: 'bluered' % % %
 
 % % % BEGIN: 'greenred' % % %
 out.greenred.data = ...
+        uint8(...
     [0,255,164;
     0,255,163;
     0,255,163;
@@ -604,7 +617,7 @@ out.greenred.data = ...
     221,1,144;
     222,0,146;
     223,0,148 ...
-    ];
+    ]);
 out.greenred.desc = 'Green to red map for impedances (as in TMSi.)';
 % % % END: 'greenred' % % %
 
@@ -627,6 +640,7 @@ elseif ~ismember(name, f)
         end
         tmp = figure('Name', 'placeholder', 'Visible', 'off');
         cmapdata = colormap(name);
+        cmapdata = uint8(round(cmapdata .* 255));
         close(tmp);
         delete(tmp);
         if switchback
@@ -638,6 +652,21 @@ elseif ~ismember(name, f)
     end
 else
     cmapdata = uint8(out.(name).data);
+end
+if ~strcmpi(options.DataType, "uint8")
+    switch options.DataType
+        case "double"
+            cmapdata = double(cmapdata) ./ 255.0;
+        case "single"
+            cmapdata = single(cmapdata) ./ single(255.0);
+        otherwise
+            error("Not set up to handle '%s' DataType option yet.", options.DataType);
+    end
+end
+
+if ~isnan(options.N)
+    cmObj = cm.cmap([1, options.N], cmapdata);
+    cmapdata = cmObj(1:options.N);
 end
 
 end

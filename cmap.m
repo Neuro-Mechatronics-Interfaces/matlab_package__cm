@@ -48,7 +48,12 @@ classdef cmap < handle
                     out = builtin('subsref', obj, S);
                 else
                     x = S.subs{1};
-                    out = [uint8(round(obj.red(x))), uint8(round(obj.green(x))), uint8(round(obj.blue(x)))];
+                    switch class(obj.cmapdata)
+                        case 'uint8'
+                            out = min(max([uint8(round(obj.red(x))), uint8(round(obj.green(x))), uint8(round(obj.blue(x)))],uint8(0)),uint8(255));
+                        otherwise
+                            out = min(max([obj.red(x), obj.green(x), obj.blue(x)],0.0),1.0);
+                    end
                 end
             else
                 out = builtin('subsref', obj, S);
@@ -70,10 +75,11 @@ classdef cmap < handle
             % are `fitobj` objects that perform a 'smoothingspline'
             % regression to fit the rgb values.
             N = size(cmapdata, 1);
-            obj.cmapdata = double(cmapdata);
-            obj.red = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 1), 'smoothingspline');
-            obj.green = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 2), 'smoothingspline');
-            obj.blue = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 3), 'smoothingspline');
+            obj.cmapdata = cmapdata;
+            cdata = double(cmapdata);
+            obj.red = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:, 1), 'smoothingspline');
+            obj.green = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:, 2), 'smoothingspline');
+            obj.blue = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:, 3), 'smoothingspline');
             
         end
         
@@ -87,9 +93,10 @@ classdef cmap < handle
             %   obj.update_limits([0, 100]); % Updates colormap limits
             N = size(obj.cmapdata, 1);
             obj.CLim = CLim;
-            obj.red = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 1), 'smoothingspline');
-            obj.green = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 2), 'smoothingspline');
-            obj.blue = fit(linspace(obj.CLim(1), obj.CLim(2), N)', obj.cmapdata(:, 3), 'smoothingspline');
+            cdata = double(obj.cmapdata);
+            obj.red = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:,1), 'smoothingspline');
+            obj.green = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:, 2), 'smoothingspline');
+            obj.blue = fit(linspace(obj.CLim(1), obj.CLim(2), N)', cdata(:, 3), 'smoothingspline');
             
         end
     end
