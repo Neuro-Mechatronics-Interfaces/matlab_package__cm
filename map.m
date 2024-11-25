@@ -18,7 +18,7 @@ function cmapdata = map(name, options)
 % See also: Contents
 
 arguments
-    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
+    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["skin_light", "skin_tan", "skin_brown", "skin_dark", "rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
     options.DataType (1,1) string {mustBeTextScalar, mustBeMember(options.DataType, ["uint8", "double", "single"])} = "uint8";
     options.N (1,1) = nan; % If non-NaN, must be positive-integer; will specify the number of elements in returned colormap in that case. Otherwise, returns the colormap as-is.
 end
@@ -78,6 +78,41 @@ out.rosette.data = ...
 out.rosette.desc = 'Orange-to-red-to-blue-to-green. For use in +rose package (Rosette class). Only 32 values.';
 % % % END: 'rosette' % % %
 
+% % % BEGIN: 'skin_<type>' % % %
+out.skin_light.data = [...
+    255   222   204
+   250   209   186
+   242   191   166
+   237   173   148
+   232   158   135
+   227   140   122];
+out.skin_light.desc = 'Skin-tone colormap for fair-skin approximation.';
+
+out.skin_tan.data = [...
+    250   209   176
+   240   194   153
+   227   176   128
+   214   158   105
+   201   140    84];
+out.skin_tan.desc = 'Tan-tone colormap for tan-skin approximation.';
+
+out.skin_brown.data = [ ...
+    186   140   112
+   171   128    97
+   153   110    79
+   135    92    64
+   120    77    51];
+out.skin_brown.desc = 'Brown-tone colormap for brown-skin approximation.';
+
+out.skin_dark.data = [ ...
+    107    84    71
+    92    71    59
+    79    61    48
+    66    51    41
+    51    38    31];
+out.skin_dark.desc = 'Dark-tone colormap for dark-skin approximation.';
+% % % END: 'skin_<type>' % % %
+
 % % % BEGIN: 'state' % % %
 out.state.data =  uint8(...
      [ ...
@@ -94,6 +129,8 @@ out.state.data =  uint8(...
 );   
 out.state.desc = 'Black-red-blue-green-yellow progression. For center-out task state color maps.';
 % % % END: 'state' % % %
+
+% % %
 
 % % % BEGIN: 'bluered' % % %
 out.bluered.data = ...
