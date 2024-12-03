@@ -18,31 +18,292 @@ function cmapdata = map(name, options)
 % See also: Contents
 
 arguments
-    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["skin_light", "skin_tan", "skin_brown", "skin_dark", "rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
+    name (1,1) string {mustBeTextScalar, mustBeMember(name, ["zscore", "skin_light", "skin_tan", "skin_brown", "skin_dark", "rosette", "tartan", "greenred", "state", "bluered", "jet", "parula", "copper", "winter", "spring", "summer", "autumn", "bone", "hsv", "turbo"])} = "greenred";
     options.DataType (1,1) string {mustBeTextScalar, mustBeMember(options.DataType, ["uint8", "double", "single"])} = "uint8";
     options.N (1,1) = nan; % If non-NaN, must be positive-integer; will specify the number of elements in returned colormap in that case. Otherwise, returns the colormap as-is.
 end
 
 out = struct;
+% % % BEGIN: 'zscore' % % %
+out.zscore.data = ...
+    uint8([48	18	59
+    50	21	67
+    51	24	74
+    52	27	81
+    53	30	88
+    54	33	95
+    55	36	102
+    56	39	109
+    57	42	115
+    58	45	121
+    59	47	128
+    60	50	134
+    61	53	139
+    62	56	145
+    63	59	151
+    63	62	156
+    64	64	162
+    65	67	167
+    65	70	172
+    66	73	177
+    66	75	181
+    67	78	186
+    68	81	191
+    68	84	195
+    68	86	199
+    72	89	199
+    75	92	199
+    79	95	199
+    82	98	200
+    85	101	200
+    89	104	200
+    92	107	200
+    96	110	200
+    99	113	200
+    102	116	200
+    106	119	200
+    109	122	201
+    112	125	201
+    116	127	201
+    119	130	201
+    123	133	201
+    126	136	201
+    129	139	201
+    133	142	201
+    136	145	202
+    140	148	202
+    143	151	202
+    146	154	202
+    150	157	202
+    153	160	202
+    157	163	202
+    160	166	202
+    163	169	203
+    167	172	203
+    170	175	203
+    173	178	203
+    177	180	203
+    180	183	203
+    184	186	203
+    187	189	203
+    190	192	204
+    194	195	204
+    197	198	204
+    201	201	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	204	204
+    204	198	197
+    204	193	190
+    204	187	183
+    204	182	176
+    204	176	169
+    204	170	163
+    203	165	156
+    203	159	149
+    203	154	142
+    203	148	135
+    203	142	128
+    203	137	121
+    203	131	114
+    203	126	107
+    203	120	100
+    203	114	93
+    203	109	86
+    203	103	80
+    203	98	73
+    202	92	66
+    202	87	59
+    202	81	52
+    202	75	45
+    202	70	38
+    202	64	31
+    202	59	24
+    202	53	17
+    202	47	10
+    202	42	4
+    204	49	3
+    206	57	3
+    207	65	3
+    209	72	3
+    211	80	3
+    213	87	3
+    215	95	3
+    217	103	3
+    219	110	2
+    221	118	2
+    223	126	2
+    225	133	2
+    226	141	2
+    228	148	2
+    230	156	2
+    232	164	2
+    234	171	1
+    236	179	1
+    238	186	1
+    240	194	1
+    242	202	1
+    244	209	1
+    245	217	1
+    247	225	1
+    249	232	0
+    251	240	0
+    253	247	0
+    255	255	0]);
+out.zscore.desc = 'Ranges from cool blues to neutral gray to warm red then yellow for largest values.';
+% % % END: 'zscore' % % %
+
 % % % BEGIN: 'tartan' % % %
 out.tartan.data = ...
     uint8(...
     [196, 18, 48;      % Carnegie Red
-       0,  0,  0;      % Black
-     109,110,113;      % Iron Grey
-     224,224,224;      % Steel Gray
-     239, 58, 71;      % Scots Red
-     253,181, 21;      % Gold Thread
-       0,150, 71;      % Green Thread
-       0,143,145;      % Teal Thread
-       4, 54,115;      % Blue Thread
-       0,123,192   ... % Highlands Sky Blue
-     ]);
+    0,  0,  0;      % Black
+    109,110,113;      % Iron Grey
+    224,224,224;      % Steel Gray
+    239, 58, 71;      % Scots Red
+    253,181, 21;      % Gold Thread
+    0,150, 71;      % Green Thread
+    0,143,145;      % Teal Thread
+    4, 54,115;      % Blue Thread
+    0,123,192   ... % Highlands Sky Blue
+    ]);
 out.tartan.desc = 'Carnegie Mellon University primary pallette is first-four rows ({Carnegie Red, Black, Iron Grey, Steel Gray}). Secondary pallette is last-6 rows ({Scots Rose, Gold Thread, Green Thread, Teal Thread, Blue Thread, Highlands Sky Blue}).';
 % % % END: 'tartan' % % %
 % % % BEGIN: 'rosette' % % %
 out.rosette.data = ...
-        uint8(...
+    uint8(...
     [255,195,165;
     247,179,162;
     238,163,160;
@@ -81,27 +342,27 @@ out.rosette.desc = 'Orange-to-red-to-blue-to-green. For use in +rose package (Ro
 % % % BEGIN: 'skin_<type>' % % %
 out.skin_light.data = [...
     255   222   204
-   250   209   186
-   242   191   166
-   237   173   148
-   232   158   135
-   227   140   122];
+    250   209   186
+    242   191   166
+    237   173   148
+    232   158   135
+    227   140   122];
 out.skin_light.desc = 'Skin-tone colormap for fair-skin approximation.';
 
 out.skin_tan.data = [...
     250   209   176
-   240   194   153
-   227   176   128
-   214   158   105
-   201   140    84];
+    240   194   153
+    227   176   128
+    214   158   105
+    201   140    84];
 out.skin_tan.desc = 'Tan-tone colormap for tan-skin approximation.';
 
 out.skin_brown.data = [ ...
     186   140   112
-   171   128    97
-   153   110    79
-   135    92    64
-   120    77    51];
+    171   128    97
+    153   110    79
+    135    92    64
+    120    77    51];
 out.skin_brown.desc = 'Brown-tone colormap for brown-skin approximation.';
 
 out.skin_dark.data = [ ...
@@ -115,18 +376,18 @@ out.skin_dark.desc = 'Dark-tone colormap for dark-skin approximation.';
 
 % % % BEGIN: 'state' % % %
 out.state.data =  uint8(...
-     [ ...
-        1       10      20      % Rich Black FOGRA 29
-        148     35      69      % Big Dip Oruby
-        107     79      115     % English Violet
-        66      122     161     % Steel Blue
-        127     140     152     % Light Slate Gray
-        75      138     210     % Tufts Blue
-        103     148     54      % Maximum Green
-        165     190     0       % Acid Green
-        212     235     65 ...  % Maximum Green Yellow
-      ] ...
-);   
+    [ ...
+    1       10      20      % Rich Black FOGRA 29
+    148     35      69      % Big Dip Oruby
+    107     79      115     % English Violet
+    66      122     161     % Steel Blue
+    127     140     152     % Light Slate Gray
+    75      138     210     % Tufts Blue
+    103     148     54      % Maximum Green
+    165     190     0       % Acid Green
+    212     235     65 ...  % Maximum Green Yellow
+    ] ...
+    );
 out.state.desc = 'Black-red-blue-green-yellow progression. For center-out task state color maps.';
 % % % END: 'state' % % %
 
@@ -134,7 +395,7 @@ out.state.desc = 'Black-red-blue-green-yellow progression. For center-out task s
 
 % % % BEGIN: 'bluered' % % %
 out.bluered.data = ...
-        uint8(...
+    uint8(...
     [...
     0     0   131
     0     1   133
@@ -397,7 +658,7 @@ out.bluered.desc = 'Blue to red map for stimulating patch, with greyish values i
 
 % % % BEGIN: 'greenred' % % %
 out.greenred.data = ...
-        uint8(...
+    uint8(...
     [0,255,164;
     0,255,163;
     0,255,163;
