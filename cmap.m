@@ -47,7 +47,7 @@ classdef cmap < handle
                 if numel(S.subs) > 1
                     out = builtin('subsref', obj, S);
                 else
-                    x = S.subs{1};
+                    x = min(max(S.subs{1},obj.CLim(1)),obj.CLim(2));
                     switch class(obj.cmapdata)
                         case 'uint8'
                             out = min(max([uint8(round(obj.red(x))), uint8(round(obj.green(x))), uint8(round(obj.blue(x)))],uint8(0)),uint8(255));
